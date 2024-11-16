@@ -1,0 +1,32 @@
+# Namespace where Jenkins will be deployed
+namespace: jenkins
+
+# Jenkins Controller Configuration
+controller:
+  serviceType: <Service Type>  # Ensure this is Load Balancer or NodePort
+  jenkinsUrl: "http://localhost:8080"
+
+  # Reference an existing Kubernetes secret for admin credentials
+  admin:
+    existingSecret: jenkins-admin-credentials # Name of the Kubernetes secret
+    userKey: username                         # Key in the secret for the username
+    passwordKey: password                     # Key in the secret for the password
+
+# Plugins to install
+installPlugins:
+  - octopusdeploy
+  - kubernetes
+  - workflow-aggregator
+  - git
+  - configuration-as-code
+  - gitlab-plugin
+  - blueocean
+  - workflow-multibranch
+  - login-theme
+  - prometheus
+  - github-oauth
+
+# Jenkins Agent Configuration
+agent:
+  enabled: true
+  jnlpPort: 50000
