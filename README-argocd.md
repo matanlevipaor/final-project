@@ -6,6 +6,7 @@
   - [Step 2: Expose the ArgoCD Server](#step-2-expose-the-argocd-server)
   - [Step 3: Retrieve the ArgoCD Initial Admin Password](#step-3-retrieve-the-argocd-initial-admin-password)
   - [Step 4: Access the ArgoCD UI](#step-4-access-the-argocd-ui)
+    - [Cleanup](#cleanup)
 
 ![ArgoCD Logo](https://argo-cd.readthedocs.io/en/stable/assets/logo.png)
 
@@ -40,13 +41,13 @@ This will set up the ArgoCD services and necessary application resources in the 
 
 ## Step 2: Expose the ArgoCD Server
 
-To access the ArgoCD UI externally, change the `argocd-server` service type to `LoadBalancer`:
+To access the ArgoCD UI externally, change the `argocd-server` service type to `LoadBalancer` or `NodePort`:
 
 ```shell
-kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
 ```
 
-> **Note**: If you're on a cloud platform, the `LoadBalancer` type will automatically provision an external IP. On other environments, you might need to set up port-forwarding.
+> **Note**: If you're on a cloud platform, the `LoadBalancer` type will automatically provision an external IP. On other environments, you might need to set up port-forwarding. If you are on windows use NodePort.
 
 ## Step 3: Retrieve the ArgoCD Initial Admin Password
 
@@ -74,3 +75,13 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.pas
 ---
 
 With these steps, you have successfully installed ArgoCD on your Kubernetes cluster! You can now start deploying and managing applications using GitOps with ArgoCD.
+
+### Cleanup
+1. To uninstall ArgoCD, run:
+   ```bash
+   kubectl delete namespace argocd
+   ```
+2. Confirm the deletion:
+   ```bash
+   kubectl get namespaces
+   ```

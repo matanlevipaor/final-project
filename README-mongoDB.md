@@ -81,3 +81,31 @@ Follow the official PostgreSQL installation guide for MacOS:
 - 📘 [PostgreSQL Official Documentation](https://www.postgresql.org/docs/)
 
 🌟 Happy Coding! 🌟
+
+---
+
+## 🧹 Cleanup: Deleting the MongoDB Installation
+
+If you want to remove the MongoDB installation from your Kubernetes cluster, follow these steps:
+
+### 1️⃣ Uninstall MongoDB
+Run the following command to uninstall MongoDB and delete its associated resources:
+
+```bash
+helm uninstall my-release --namespace mongodb
+```
+
+This command removes all resources associated with the MongoDB Helm release.
+
+### 2️⃣ Delete the MongoDB Namespace
+To clean up the namespace created during the installation, run:
+
+```bash
+kubectl delete namespace mongodb
+```
+
+This command deletes the `mongodb` namespace and all remaining resources within it.
+
+💡 **Note:** Ensure you have backed up any important data before running these commands as they will permanently delete the MongoDB installation and its data.
+
+---

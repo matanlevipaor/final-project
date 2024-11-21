@@ -10,10 +10,9 @@ To keep your installations clean and organized, let's create dedicated namespace
 
 ```bash
 # Create namespace for Prometheus
-kubectl create namespace prometheus
 
 # Create namespace for Grafana
-kubectl create namespace grafana
+kubectl create namespace observation
 ```
 
 > 🎯 **Tip**: Namespaces help isolate resources and manage configurations more effectively.
@@ -25,7 +24,7 @@ kubectl create namespace grafana
 Install Prometheus into the `prometheus` namespace with this simple Helm command:
 
 ```bash
-helm install prometheus prometheus-community/prometheus --namespace prometheus
+helm install prometheus prometheus-community/prometheus --namespace observation
 ```
 
 ### ✅ Verify Installation
@@ -33,7 +32,7 @@ helm install prometheus prometheus-community/prometheus --namespace prometheus
 Check if all Prometheus resources are up and running:
 
 ```bash
-kubectl get all -n prometheus
+kubectl get all -n observation
 ```
 
 ### 🌐 Access Prometheus
@@ -43,7 +42,7 @@ kubectl get all -n prometheus
 For local testing, forward the Prometheus service port:
 
 ```bash
-kubectl port-forward -n prometheus service/prometheus-server 9090:80
+kubectl port-forward -n observation service/prometheus-server 9090:80
 ```
 
 Access Prometheus via your browser:
@@ -58,13 +57,13 @@ http://localhost:9090
 Change the service type to `NodePort` or `LoadBalancer`:
 
 ```bash
-kubectl patch service prometheus-server -n prometheus -p '{"spec": {"type": "NodePort"}}'
+kubectl patch service prometheus-server -n observation -p '{"spec": {"type": "NodePort"}}'
 ```
 
 Retrieve the NodePort with the following command:
 
 ```bash
-kubectl get service prometheus-server -n prometheus -o=jsonpath='{.spec.ports[0].nodePort}'
+kubectl get service prometheus-server -n observation -o=jsonpath='{.spec.ports[0].nodePort}'
 ```
 
 Access Prometheus at:
@@ -73,27 +72,6 @@ Access Prometheus at:
 http://<NodeIP>:<NodePort>
 ```
 
-#### 🌍 Expose Grafana Externally (NodePort or LoadBalancer)
-
-Change the service type to `NodePort` or `LoadBalancer`:
-
-```bash
-kubectl patch service grafana -n grafana -p '{"spec": {"type": "NodePort"}}'
-```
-
-Retrieve the NodePort with the following command:
-
-```bash
-kubectl get service grafana -n grafana -o=jsonpath='{.spec.ports[0].nodePort}'
-```
-
-Access Grafana at:
-
-```
-http://<NodeIP>:<NodePort>
-```
-
-
 ---
 
 ## 🎨 Step 3: Install Grafana with Helm
@@ -101,7 +79,7 @@ http://<NodeIP>:<NodePort>
 Install Grafana into the `grafana` namespace using this command:
 
 ```bash
-helm install grafana grafana/grafana --namespace grafana
+helm install grafana grafana/grafana --namespace observation
 ```
 
 ### ✅ Verify Installation
@@ -109,7 +87,7 @@ helm install grafana grafana/grafana --namespace grafana
 Ensure all Grafana resources are up and running:
 
 ```bash
-kubectl get all -n grafana
+kubectl get all -n observation
 ```
 
 ### 🌐 Access Grafana
@@ -119,7 +97,7 @@ kubectl get all -n grafana
 Forward the Grafana service port locally:
 
 ```bash
-kubectl port-forward -n grafana service/grafana 3000:80
+kubectl port-forward -n observation service/grafana 3000:80
 ```
 
 Access Grafana via your browser:
@@ -133,9 +111,13 @@ http://localhost:3000
 Modify the service type for external access:
 
 ```bash
-kubectl patch service grafana -n grafana -p '{"spec": {"type": "NodePort"}}'
+kubectl patch service grafana -n observation -p '{"spec": {"type": "NodePort"}}'
 ```
+Retrieve the NodePort with the following command:
 
+```bash
+kubectl get service grafana -n observation -o=jsonpath='{.spec.ports[0].nodePort}'
+```
 Retrieve the NodePort and access Grafana at:
 
 ```
@@ -151,7 +133,7 @@ Grafana generates default admin credentials during installation. Retrieve them a
 ### 📝 Get the Secret
 
 ```bash
-kubectl get secret -n grafana grafana -o yaml
+kubectl get secret -n observation <grafana/prometheus> -o yaml
 ```
 
 ### 🔓 Decode the Credentials
@@ -196,14 +178,14 @@ If you need to uninstall Prometheus and Grafana, here’s how to do it safely.
 ### ❌ Uninstall Prometheus
 
 ```bash
-helm uninstall prometheus --namespace prometheus
+helm uninstall prometheus --namespace observation
 kubectl delete namespace prometheus
 ```
 
 ### ❌ Uninstall Grafana
 
 ```bash
-helm uninstall grafana --namespace grafana
+helm uninstall grafana --namespace observation
 kubectl delete namespace grafana
 ```
 
@@ -212,8 +194,8 @@ kubectl delete namespace grafana
 Ensure all resources have been removed:
 
 ```bash
-kubectl get all -n prometheus
-kubectl get all -n grafana
+kubectl get all -n observation
+kubectl get all -n observation
 ```
 
 Expected output:

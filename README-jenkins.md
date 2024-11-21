@@ -1,5 +1,3 @@
-
-+++markdown
 # 🚀 Install Jenkins on Kubernetes with Helm 🌟
 
 This guide walks you through installing Jenkins on a Kubernetes cluster using Helm. Jenkins will be exposed via a NodePort, and we'll use a pre-created Kubernetes secret for admin credentials.
