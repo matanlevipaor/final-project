@@ -2,7 +2,7 @@
 
 Easily set up **Prometheus** 🛠️ and **Grafana** 📊 on your Kubernetes cluster using Helm. These tools are perfect for monitoring and visualizing cluster metrics. Follow this beautifully organized guide for a seamless setup experience! ✨
 
----
+--- 
 
 ## 🌟 Step 1: Create Namespaces
 

@@ -83,5 +83,5 @@ With these steps, you have successfully installed ArgoCD on your Kubernetes clus
    ```
 2. Confirm the deletion:
    ```bash
-   kubectl get namespaces
+   kubectl get namespaces 
    ```

@@ -7,7 +7,7 @@ System Requirements: Ensure your system meets the minimum requirements to enable
 Steps to Enable Kubernetes
 ## 1. Open Docker Desktop Settings
 Click the gear icon in the top-right corner of Docker Desktop to open the Settings menu.
-![Docker setting + k8s](./images/k8s-2.png)
+![Docker setting + k8s](./images/k8s-2.png) 
 
 
 

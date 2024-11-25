@@ -107,5 +107,5 @@ kubectl delete namespace mongodb
 This command deletes the `mongodb` namespace and all remaining resources within it.
 
 💡 **Note:** Ensure you have backed up any important data before running these commands as they will permanently delete the MongoDB installation and its data.
-
+ 
 ---

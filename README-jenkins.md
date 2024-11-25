@@ -5,7 +5,7 @@ This guide walks you through installing Jenkins on a Kubernetes cluster using He
 ---
 
 ## 🛠 Prerequisites
-Before you begin, ensure the following:
+Before you begin, ensure the following: 
 
 1. ✅ Kubernetes cluster is up and running.
 2. ✅ `kubectl` is installed and configured to communicate with your cluster.
